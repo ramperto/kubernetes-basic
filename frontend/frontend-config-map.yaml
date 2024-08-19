@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config-map
+  namespace: frontend
+data:
+  nginx.conf: |
+    events { }
+    http {
+      server {
+        listen 80;
+        location / {
+          proxy_pass http://backend-service.backend.svc.cluster.local:80;
+        }
+      }
+    }
